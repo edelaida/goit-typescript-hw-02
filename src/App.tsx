@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Image } from './types';
 import { requestPicturesQuery } from "./components/api";
 import Loader from "./components/Loader/Loader";
@@ -35,7 +34,7 @@ function App() {
       try {
         setError(false);
         setLoading(true);
-        const data:TotalResponse = await requestPicturesQuery(query, page);
+        const data = await requestPicturesQuery<TotalResponse>(query, page);
         setPictures((prev) => [...prev, ...data.results]);
       } catch (error) {
         setError(true);

@@ -1,11 +1,11 @@
-import React, {FC, MouseEvent} from "react";
+import React, {FC} from "react";
 import s from "../ImageGallery/ImageGallery.module.css";
 import { Image } from '../../types'
 
 
 interface ImageCardProps {
   picture: Image;
-  onClick: (event: MouseEvent<HTMLDivElement>) => void;
+  onClick: () => void;
 };
 
 const ImageCard: React.FC<ImageCardProps> = ({ picture, onClick }) => {
