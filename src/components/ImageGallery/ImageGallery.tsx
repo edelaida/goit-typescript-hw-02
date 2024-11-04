@@ -1,21 +1,12 @@
 import ImageCard from "../ImageCard/ImageCard";
+import React, {FC, MouseEvent} from "react";
 import s from "./ImageGallery.module.css";
-import {Picture} from '../../types'
+import {Image} from '../../types'
 
-interface Image {
-  id: number;
-  picture: string;
-  description: string;
-  urls: {
-    small: string;
-    regular: string;
-  };
-}
-
-interface ImageGalleryProps{
-  pictures: Image[];
-  onImageClick:any;  
-}
+interface ImageGalleryProps {
+  pictures: Image[];  
+  onImageClick: (picture: Image) => void;
+};
 
 const ImageGallery:React.FC<ImageGalleryProps> = ({ pictures, onImageClick }) => {
   return (

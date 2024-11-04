@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useEffect } from "react";
-import { Picture } from './types';
+import { Image } from './types';
 import { requestPicturesQuery } from "./components/api";
 import Loader from "./components/Loader/Loader";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
@@ -12,27 +12,12 @@ import Modal from "react-modal";
 
 Modal.setAppElement;
 
-interface Image {
-  id: number;
-  picture: string;
-  description: string;
-  urls: {
-    small: string;
-    regular: string;
-  };
-}
-
+ 
 interface TotalResponse {
   results: Image[];
   pages: number;
 }
 
-interface ModalResponse{
-  picture: string;
-  urls: '';
-  regular: '';
-  setModalData: null;
-}
 
 function App() {
   const [pictures, setPictures] = useState<Image[]>([]);
@@ -41,7 +26,7 @@ function App() {
   const [query, setQuery] = useState<string>("");
   const [page, setPage] = useState<number>(1);
   const [modalIsOpen, setModalIsOpen] = useState <boolean>(false);
-  const [modalData, setModalData] = useState<ModalResponse>(any);
+  const [modalData, setModalData] = useState<string | null>(null);
 
   useEffect(() => {
     if (query.length === 0) return;
@@ -70,9 +55,9 @@ function App() {
 
   const onSearchPage = () => {
     setPage((page) => page + 1);
-  };
+  };  
 
-  const openModal = (picture:any) => {
+  const openModal = (picture:Image) => {
     setModalData(picture.urls.regular);
     setModalIsOpen(true);
   };

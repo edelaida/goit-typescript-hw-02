@@ -3,13 +3,12 @@ export interface Picture {
   page: number,  
 }
     
-export interface PictureImg {
-  picture: {
-    id: number,
-    alt_description: string,
-    urls: {
-      small: string,
-      regular: string
-    }
-  }      
+export interface Image {
+  id: number;
+  picture: string;
+  alt_description: string;
+  urls: {
+    small: string;
+    regular: string;
+  };
 }
