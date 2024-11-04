@@ -1,7 +1,23 @@
 import ImageCard from "../ImageCard/ImageCard";
 import s from "./ImageGallery.module.css";
+import {Picture} from '../../types'
 
-const ImageGallery = ({ pictures, onImageClick }) => {
+interface Image {
+  id: number;
+  picture: string;
+  description: string;
+  urls: {
+    small: string;
+    regular: string;
+  };
+}
+
+interface ImageGalleryProps{
+  pictures: Image[];
+  onImageClick:any;  
+}
+
+const ImageGallery:React.FC<ImageGalleryProps> = ({ pictures, onImageClick }) => {
   return (
     <ul className={s.blokapp}>
       {pictures &&

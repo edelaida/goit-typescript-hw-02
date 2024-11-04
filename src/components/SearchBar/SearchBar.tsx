@@ -1,10 +1,13 @@
+
+import {FormEvent} from "react";
 import toast, { Toaster } from "react-hot-toast";
 import s from "../ImageGallery/ImageGallery.module.css";
+import React from "react";
 
 const notify = () => toast("Please enter search term!");
 
 const SearchBar = ({ onSearchBar }) => {
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>):void => {
     e.preventDefault();
     const form = e.target;
     const name = form.elements.name.value;

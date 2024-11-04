@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useEffect } from "react";
-
+import { Picture } from './types';
 import { requestPicturesQuery } from "./components/api";
 import Loader from "./components/Loader/Loader";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
@@ -12,14 +12,36 @@ import Modal from "react-modal";
 
 Modal.setAppElement;
 
+interface Image {
+  id: number;
+  picture: string;
+  description: string;
+  urls: {
+    small: string;
+    regular: string;
+  };
+}
+
+interface TotalResponse {
+  results: Image[];
+  pages: number;
+}
+
+interface ModalResponse{
+  picture: string;
+  urls: '';
+  regular: '';
+  setModalData: null;
+}
+
 function App() {
-  const [pictures, setPictures] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [query, setQuery] = useState("");
-  const [page, setPage] = useState(1);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [modalData, setModalData] = useState(null);
+  const [pictures, setPictures] = useState<Image[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+  const [query, setQuery] = useState<string>("");
+  const [page, setPage] = useState<number>(1);
+  const [modalIsOpen, setModalIsOpen] = useState <boolean>(false);
+  const [modalData, setModalData] = useState<ModalResponse>(any);
 
   useEffect(() => {
     if (query.length === 0) return;
@@ -28,7 +50,7 @@ function App() {
       try {
         setError(false);
         setLoading(true);
-        const data = await requestPicturesQuery(query, page);
+        const data:TotalResponse = await requestPicturesQuery(query, page);
         setPictures((prev) => [...prev, ...data.results]);
       } catch (error) {
         setError(true);
@@ -40,7 +62,7 @@ function App() {
     fetchPicturesQuery();
   }, [query, page]);
 
-  const onSearchBar = (name) => {
+  const onSearchBar = (name:string) => {
     setQuery(name);
     setPictures([]);
     setPage(1);
@@ -50,7 +72,7 @@ function App() {
     setPage((page) => page + 1);
   };
 
-  const openModal = (picture) => {
+  const openModal = (picture:any) => {
     setModalData(picture.urls.regular);
     setModalIsOpen(true);
   };
