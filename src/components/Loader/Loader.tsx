@@ -1,11 +1,9 @@
-//import React from "react";
-import { RotatingLines } from "react-loader-spinner";
+import { Circles } from "react-loader-spinner";
 
 const Loader = () => {
   return (
     <div>
-      <RotatingLines
-        visible={true}
+      {/* <RotatingLines         
         height="96"
         width="96"
         color="grey"
@@ -14,7 +12,17 @@ const Loader = () => {
         ariaLabel="rotating-lines-loading"
         wrapperStyle={{}}
         wrapperClass=""
-      />
+        visible={true}
+      /> */}
+      <Circles
+  height="80"
+  width="80"
+  color="#4fa94d"
+  ariaLabel="circles-loading"
+  wrapperStyle={{}}
+  wrapperClass=""
+  visible={true}
+  />
     </div>
   );
 };
