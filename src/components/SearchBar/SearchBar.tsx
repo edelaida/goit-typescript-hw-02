@@ -2,15 +2,20 @@
 import {FormEvent} from "react";
 import toast, { Toaster } from "react-hot-toast";
 import s from "../ImageGallery/ImageGallery.module.css";
-import React from "react";
+import React, {FC}  from "react";
 
 const notify = () => toast("Please enter search term!");
 
-const SearchBar = ({ onSearchBar }) => {
+interface SearchBarProps {
+  onSearchBar: (name:string)=>void; 
+};
+
+const SearchBar: React.FC<SearchBarProps> = ({ onSearchBar }) => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>):void => {
     e.preventDefault();
-    const form = e.target;
-    const name = form.elements.name.value;
+    const form = e.currentTarget;
+    const input = form.elements.namedItem("name") as HTMLInputElement;
+    const name = input.value;
     if (name.length === 0) {
       notify();
     } else {
